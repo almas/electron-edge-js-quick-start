@@ -43,6 +43,8 @@ var getPerson = edge.func({
 
 window.onload = function() {
 
+    document.getElementById("ProcessVersions").innerHTML = `<pre>${JSON.stringify(process.versions, null, 2)}</pre>`
+
     getAppDomainDirectory('', function(error, result) {
         if (error) throw error;
         document.getElementById("GetAppDomainDirectory").innerHTML = result;

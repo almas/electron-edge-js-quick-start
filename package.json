@@ -7,7 +7,9 @@
     "start": "electron --core .",
     "start:core": "electron --core .",
     "start:standard": "electron --standard .",
-    "start:native": "electron --native ."
+    "start:native": "electron --native .",
+    "rebuild:release": "node-gyp rebuild --msvs_version=2019 --target=10.1.5 --arch=x64 -release --dist-url=https://electronjs.org/headers --arch=x64 --directory=./node_modules/electron-edge-js",
+    "rebuild:debug" : "node-gyp rebuild --msvs_version=2019 --target=10.1.5 --arch=x64 -debug --dist-url=https://electronjs.org/headers --arch=x64 --directory=./node_modules/electron-edge-js"
   },
   "repository": "https://github.com/agracio/electron-edge-js-quick-start",
   "keywords": [
@@ -21,7 +23,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "electron": "^5.0.3",
-    "electron-edge-js": "^12.4.0"
+    "electron": "10.1.5",
+    "electron-edge-js": "ArticySoftware/electron-edge-js"
   }
 }
