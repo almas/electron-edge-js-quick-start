@@ -146,7 +146,7 @@ edge-cs@1.2.1:
   resolved "https://registry.yarnpkg.com/edge-cs/-/edge-cs-1.2.1.tgz#bd1a9ecdb94ef0ed40c894582046749e57045e5a"
   integrity sha1-vRqezblO8O1AyJRYIEZ0nlcEXlo=
 
-electron-edge-js@ArticySoftware/electron-edge-js#b5d5167:
+electron-edge-js@ArticySoftware/electron-edge-js#4aa4fd5:
   version "12.4.1"
   resolved "https://codeload.github.com/ArticySoftware/electron-edge-js/tar.gz/4aa4fd5a1a7b7acc7f73052f41071060af148ba3"
   dependencies:
