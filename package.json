@@ -24,6 +24,6 @@
   "license": "MIT",
   "dependencies": {
     "electron": "10.1.5",
-    "electron-edge-js": "ArticySoftware/electron-edge-js"
+    "electron-edge-js": "ArticySoftware/electron-edge-js#4aa4fd5"
   }
 }
