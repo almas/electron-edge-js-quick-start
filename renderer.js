@@ -6,6 +6,8 @@ if(version === 'core') version = 'coreapp';
 const baseNetAppPath = path.join(__dirname, '/src/'+ namespace +'/bin/Debug/net5.0');
 
 process.env.EDGE_USE_CORECLR = 1;
+process.env.EDGE_DEBUG = 1;
+
 
 if(version !== 'standard')
     process.env.EDGE_APP_ROOT = baseNetAppPath;
@@ -41,6 +43,30 @@ var getPerson = edge.func({
     methodName: 'GetPersonInfo'
 });
 
+var getDelegate = edge.func({
+    assemblyFile: baseDll,
+    typeName: localTypeName,
+    methodName: 'GetDelegateHandle'
+});
+
+var getComplexObject = edge.func({
+    assemblyFile: baseDll,
+    typeName: localTypeName,
+    methodName: 'GetComplexObject'
+});
+
+var getFromThread = edge.func({
+    assemblyFile: baseDll,
+    typeName: localTypeName,
+    methodName: 'GetFromThread'
+});
+
+var registerEventCallback = edge.func({
+    assemblyFile: baseDll,
+    typeName: localTypeName,
+    methodName: 'RegisterEventCallback'
+});
+
 
 window.onload = function() {
 
@@ -66,4 +92,35 @@ window.onload = function() {
         document.getElementById("GetPersonInfo").innerHTML = result;
     });
 
+    getDelegate('', function(error, result){
+        if(error) throw error;
+        
+        console.log(result)
+        //document.getElementById("GetPersonInfo").innerHTML = time;
+    })
+
+    getComplexObject('', function(error, result){
+        if(error) throw error;
+        
+        console.log(result)
+        //document.getElementById("GetComplexObject").innerHTML = result;
+    })
+
+    getFromThread('', function(error, result){
+        if(error) throw error;
+        
+        console.log(result)
+        //document.getElementById("GetFromThread").innerHTML = result;
+    })
+
+    registerEventCallback({EventCallback: OnTimerElapsed}, function(error, result){
+        if(error) throw error;
+        console.log('Registering done')
+    })
 };
+
+function OnTimerElapsed(signalTime){
+
+    console.log(signalTime)
+    document.getElementById("OnTimerElapsed").innerHTML = signalTime;
+}
