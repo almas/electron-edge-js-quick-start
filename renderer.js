@@ -95,22 +95,27 @@ window.onload = function() {
     getDelegate('', function(error, result){
         if(error) throw error;
         
-        console.log(result)
-        //document.getElementById("GetPersonInfo").innerHTML = time;
+        console.log(result);
+        var getTimeFunc = result.GetCurrentTime;
+
+        getTimeFunc('', function(error, result){
+            if(error) throw error;
+            console.log(result);
+            document.getElementById("GetCurrentTimeFromDelegate").innerHTML = result;
+        });
     })
 
     getComplexObject('', function(error, result){
         if(error) throw error;
         
-        console.log(result)
-        //document.getElementById("GetComplexObject").innerHTML = result;
+        console.log(result);
+        document.getElementById("GetDictionary").innerHTML = result['test'];
     })
 
     getFromThread('', function(error, result){
         if(error) throw error;
         
-        console.log(result)
-        //document.getElementById("GetFromThread").innerHTML = result;
+        console.log(result);
     })
 
     registerEventCallback({EventCallback: OnTimerElapsed}, function(error, result){
