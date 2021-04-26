@@ -5,9 +5,11 @@ if(version === 'core') version = 'coreapp';
 
 const baseNetAppPath = path.join(__dirname, '/src/'+ namespace +'/bin/Debug/net5.0');
 
+
 process.env.EDGE_USE_CORECLR = 1;
 process.env.EDGE_DEBUG = 1;
 
+console.log(JSON.stringify(process.versions, null, 2));
 
 if(version !== 'standard')
     process.env.EDGE_APP_ROOT = baseNetAppPath;
@@ -109,7 +111,7 @@ window.onload = function() {
         if(error) throw error;
         
         console.log(result);
-        document.getElementById("GetDictionary").innerHTML = result['test'];
+        document.getElementById("GetDictionary").innerHTML = result['test'] + "\r\n" + result['now'] + "\r\n" + result['long'];
     })
 
     getFromThread('', function(error, result){
@@ -124,8 +126,18 @@ window.onload = function() {
     })
 };
 
-function OnTimerElapsed(signalTime){
+function OnTimerElapsed(signalTime, callback ){
 
+    document.getElementById("OnTimerElapsed").innerHTML = signalTime
     console.log(signalTime)
-    document.getElementById("OnTimerElapsed").innerHTML = signalTime;
+    
+    // result of method
+    var result = 123;
+    
+    // "complete method" with (error, result) return values reported via the given callback
+    callback(null, result);
+    
+    // error case
+    // callback(new Error("Exception in OnTimeElapsed"), result);
 }
+

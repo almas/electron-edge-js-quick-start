@@ -16,9 +16,27 @@ namespace QuickStart.Core
         {
 	        var timer = new Timer(5000);
 
-	        timer.Elapsed += (sender, args) =>
+	        timer.Elapsed += async (sender, args) =>
 	        {
-		        mNotifyFrontend?.Invoke(args.SignalTime);
+		        if (mNotifyFrontend != null)
+		        {
+			        Console.WriteLine("TimerEvent: Invoking callback at "+args.SignalTime.ToString() );
+			        var task = mNotifyFrontend.Invoke(args.SignalTime);
+			        Console.WriteLine("TimerEvent: Returned from callback at "+args.SignalTime.ToString() );
+			        if (task != null)
+			        {
+			        	try	
+			        	{
+					        Console.WriteLine($"TimerEvent: Status: {task.Status} ({task.Status:D}), completed: {task.IsCompleted}");
+					        var result = await task;
+					        Console.WriteLine($"TimerEvent: task awaited. result={result}");
+				      	}
+				      	catch (Exception e)
+				      	{
+									Console.WriteLine($"TimerEvent: Exception caught={e}");
+								}
+			        }
+		        }
 	        };
 
 	        timer.Start();
@@ -50,8 +68,9 @@ namespace QuickStart.Core
 	        var obj = new ExpandoObject();
 	        IDictionary<string, object> dict;
 	        dict = obj;
-	        dict.Add("test", "testObj");
-
+	        dict.Add("test", "testObj äöü€");
+	        dict.Add("now", DateTime.UtcNow);
+	        dict.Add("long", 0xC000000000000003ul);
 	        return obj;
         }
 
@@ -78,6 +97,7 @@ namespace QuickStart.Core
         {
 	        //Debugger.Launch();
 	        mNotifyFrontend = input.EventCallback;
+	        Console.WriteLine("RegisterEventCallback: Callback set, returning.");
 	        return null;
         }
     }
