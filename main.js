@@ -7,28 +7,6 @@ const app = electron.app;
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow;
 
-/* Edge test in main process */
-/*
-const path = require('path');
-var version = 'core';
-var namespace = 'QuickStart.' + version.charAt(0).toUpperCase() + version.substr(1);
-if(version === 'core') version = 'coreapp';
-
-const baseNetAppPath = path.join(__dirname, '/src/'+ namespace +'/bin/Debug/net5.0');
-
-process.env.EDGE_USE_CORECLR = 1;
-process.env.EDGE_DEBUG = 1;
-
-console.log(JSON.stringify(process.versions, null, 2));
-
-if(version !== 'standard')
-    process.env.EDGE_APP_ROOT = baseNetAppPath;
-
-var edge = require('electron-edge-js');
-
-process.exit();
-*/
-/* End of Edge Test in Main Process */
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -38,10 +16,11 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1052,
-    height: 900,
+    height: 600,
     webPreferences:{
       nodeIntegration: true,
-      nodeIntegrationInWorker: true
+      nodeIntegrationInWorker: true,
+      contextIsolation: false
     }
   });
 
